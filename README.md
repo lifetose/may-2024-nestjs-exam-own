@@ -57,7 +57,7 @@ $ npm run start:prod
 When running app all available command could be found based on localhost, for example for 3000 it is http://localhost:3000/docs using swagger
 Example command: http://localhost:3000/api/users/filter
 
-There are routes for auth, users and posts than can be accessed based on your port
+There are routes for auth, users and posts than could be accessed on your port
 
 Each route has endpoints.
 
