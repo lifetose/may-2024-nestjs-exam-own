@@ -118,16 +118,16 @@ Each route has endpoints.
 - /users/delete-me - DELETE - delete logged user
   Bearer access token
 
-- /users/me/avatar - POST - update logged user
+- /users/me/avatar - POST - add user avatar
   Bearer access token
   body, form-data:{
   avatar: image
   }
 
-- /users/me/avatar - DELETE - update logged user
+- /users/me/avatar - DELETE - delete user avatar
   Bearer access token
 
-- /users/search - GET - update logged user
+- /users/search - GET - search logged user by id or email
   Bearer access token
   body:{
   "userid": "a0a37d43-13c4-44ed-a96f-c073ed52989e",
