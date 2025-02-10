@@ -4,8 +4,8 @@ services:
   may-2024-postgres:
     image: postgres:16.1
     ports:
-      # - '${POSTGRES_PORT}:5432'
-      - '8080:${POSTGRES_PORT}'
+      - '${POSTGRES_PORT}:5432'
+      # - '8080:${POSTGRES_PORT}'
     environment:
       POSTGRES_USER: '${POSTGRES_USER:-user}'
       POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-password}'
