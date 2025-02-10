@@ -45,40 +45,140 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Run tests
+---
 
-```bash
-# unit tests
-$ npm run test
+---
 
-# e2e tests
-$ npm run test:e2e
+## Usage (Docs)
 
-# test coverage
-$ npm run test:cov
-```
+When running app all available command could be found based on localhost, for example for 3000 it is http://localhost:3000/docs using swagger
+Example command: http://localhost:3000/api/users/filter
 
-## Resources
+There are routes for auth, users and posts than can be accessed based on your port
 
-Check out a few resources that may come in handy when working with NestJS:
+Each route has endpoints.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+---
 
-## Support
+1. /auth:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- /auth/sign-up - POST - creating new user;
+  body: {
+  "email": "sashalehedza3@gmail.com",
+  "password": "Lifetose42!",
+  "name": "sashalehedza",
+  "deviceId":"id1"
+  }
 
-## Stay in touch
+- /auth/sign-in - POST - login
+  body: {
+  "email": "sashalehedza1@gmail.com",
+  "password": "Lifetose42!",
+  "deviceId":"id1"
+  }
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- /auth/sign-out - POST - logout
+  Bearer access token
+
+- /auth/refresh - POST - refresh token
+  Bearer refresh token
+
+---
+
+2. /users:
+
+- /users/all - GET - getting all users
+  Bearer access token
+
+- /users/filter - GET - getting filtered users
+  Bearer access token
+  query params:
+  limit?:number,
+  page?: number,
+  name?: string
+  sort?: string
+
+- /users/:id - GET - getting users by id
+  params:
+  user id
+
+- /users/me - GET - getting logged user
+  Bearer access token
+
+- /users/me - PATCH - update logged user
+  Bearer access token
+  body:{
+  "name": "username1",
+  "bio": "bio1"
+  }
+
+- /users/remove-me - DELETE - remove logged user
+  Bearer access token
+
+- /users/delete-me - DELETE - delete logged user
+  Bearer access token
+
+- /users/me/avatar - POST - update logged user
+  Bearer access token
+  body, form-data:{
+  avatar: image
+  }
+
+- /users/me/avatar - DELETE - update logged user
+  Bearer access token
+
+- /users/search - GET - update logged user
+  Bearer access token
+  body:{
+  "userid": "a0a37d43-13c4-44ed-a96f-c073ed52989e",
+  "email": "sashalehedza"
+  }
+
+---
+
+3. /posts:
+
+- /posts/create - POST - create post
+  Bearer access token
+  body:{
+  "title": "title",
+  "description": "description",
+  "body": "body"
+  }
+
+- /posts - GET - get posts
+  Bearer access token
+  query params:
+  limit?:number,
+  page?: number,
+  name?: string
+  sort?: string
+
+- /posts/user/:id - GET - get user posts
+  Bearer access token
+  query params:
+  limit?:number,
+  page?: number,
+  name?: string
+  sort?: string
+
+- /posts/:id - GET - get post by id
+  Bearer access token
+
+- /posts/:id - DELETE - delete post by id
+  Bearer access token
+
+- /posts/:id - PUT - update post by id
+  Bearer access token
+  body:{
+  "title": "title",
+  "description": "description",
+  "body": "body"
+  }
+
+---
+
+---
 
 ## License
 
