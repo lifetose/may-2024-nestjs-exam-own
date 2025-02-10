@@ -1,0 +1,669 @@
+{
+  "info": {
+    "_postman_id": "7555a99f-4fb6-4494-9a63-4afd63d73b12",
+    "name": "may-2024-nestjs-exam-own",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "14547614"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "sign up",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = JSON.parse(pm.response.text());",
+                  "pm.environment.set(\"accessToken\",body.tokens.accessToken)",
+                  "pm.environment.set(\"refreshToken\",body.tokens.refreshToken)"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"sashalehedza3@gmail.com\",\n  \"password\": \"Lifetose42!\",\n  \"name\": \"sashalehedza\",\n  \"deviceId\":\"id1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_HOST}}/auth/sign-up",
+              "host": ["{{API_HOST}}"],
+              "path": ["auth", "sign-up"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "sign in",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = JSON.parse(pm.response.text());",
+                  "pm.environment.set(\"accessToken\",body.tokens.accessToken)",
+                  "pm.environment.set(\"refreshToken\",body.tokens.refreshToken)"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [""],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"sashalehedza1@gmail.com\",\n  \"password\": \"Lifetose42!\",\n  \"deviceId\":\"id1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_HOST}}/auth/sign-in",
+              "host": ["{{API_HOST}}"],
+              "path": ["auth", "sign-in"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "sign-out",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{API_HOST}}/auth/sign-out",
+              "host": ["{{API_HOST}}"],
+              "path": ["auth", "sign-out"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "refresh",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = JSON.parse(pm.response.text());",
+                  "pm.environment.set(\"accessToken\",body.accessToken)",
+                  "pm.environment.set(\"refreshToken\",body.refreshToken)"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{refreshToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_HOST}}/auth/refresh",
+              "host": ["{{API_HOST}}"],
+              "path": ["auth", "refresh"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "posts",
+      "item": [
+        {
+          "name": "posts",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"title\",\n  \"description\": \"description\",\n  \"body\": \"body\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_HOST}}/posts",
+              "host": ["{{API_HOST}}"],
+              "path": ["posts"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "posts",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_HOST}}/posts?sort=ASC",
+              "host": ["{{API_HOST}}"],
+              "path": ["posts"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "string2",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "5",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "2",
+                  "disabled": true
+                },
+                {
+                  "key": "sort",
+                  "value": "ASC"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user posts",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_HOST}}/posts/user/b7e336a1-3c1a-4cec-b738-517e96e94d8f?limit=5",
+              "host": ["{{API_HOST}}"],
+              "path": ["posts", "user", "b7e336a1-3c1a-4cec-b738-517e96e94d8f"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "post by Id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"body\": \"string\",\n  \"tags\": [\n    \"string\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_HOST}}/posts/4c9e5ed0-30b1-4bd4-a5ab-cc8133ecdb9a",
+              "host": ["{{API_HOST}}"],
+              "path": ["posts", "4c9e5ed0-30b1-4bd4-a5ab-cc8133ecdb9a"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "post by Id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_HOST}}/posts/97a4a32e-ccaf-46f1-bcc2-949762e9682b",
+              "host": ["{{API_HOST}}"],
+              "path": ["posts", "97a4a32e-ccaf-46f1-bcc2-949762e9682b"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "post by Id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"string1\",\n  \"description\": \"string1\",\n  \"body\": \"string1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_HOST}}/posts/a0a37d43-13c4-44ed-a96f-c073ed52989e",
+              "host": ["{{API_HOST}}"],
+              "path": ["posts", "a0a37d43-13c4-44ed-a96f-c073ed52989e"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "all users",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_HOST}}/users/all",
+              "host": ["{{API_HOST}}"],
+              "path": ["users", "all"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "fliter",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_HOST}}/users/filter?limit=2&name=3&sort=DESC",
+              "host": ["{{API_HOST}}"],
+              "path": ["users", "filter"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "2"
+                },
+                {
+                  "key": "page",
+                  "value": "2",
+                  "disabled": true
+                },
+                {
+                  "key": "name",
+                  "value": "3"
+                },
+                {
+                  "key": "sort",
+                  "value": "DESC"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user by Id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{API_HOST}}/users/48dccc6f-3ef9-4641-bdb8-db712c09ab9f",
+              "host": ["{{API_HOST}}"],
+              "path": ["users", "48dccc6f-3ef9-4641-bdb8-db712c09ab9f"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "me",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_HOST}}/users/me",
+              "host": ["{{API_HOST}}"],
+              "path": ["users", "me"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "me",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"string\",\n  \"bio\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_HOST}}/users/me",
+              "host": ["{{API_HOST}}"],
+              "path": ["users", "me"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "remove me",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{API_HOST}}/users/remove/me",
+              "host": ["{{API_HOST}}"],
+              "path": ["users", "remove", "me"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete me",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{API_HOST}}/users/delete/me",
+              "host": ["{{API_HOST}}"],
+              "path": ["users", "delete", "me"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "me/avatar",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "src": "postman-cloud:///1efb0453-ae80-4190-ba75-9c66f48fe0e6"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{API_HOST}}/users/me/avatar",
+              "host": ["{{API_HOST}}"],
+              "path": ["users", "me", "avatar"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "me/avatar",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{API_HOST}}/users/me/avatar",
+              "host": ["{{API_HOST}}"],
+              "path": ["users", "me", "avatar"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "search",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{API_HOST}}/users/search",
+              "host": ["{{API_HOST}}"],
+              "path": ["users", "search"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "48dccc6f-3ef9-4641-bdb8-db712c09ab9f",
+                  "disabled": true
+                },
+                {
+                  "key": "email",
+                  "value": "dyinglikethat@gmail.com",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
