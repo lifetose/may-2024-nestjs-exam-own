@@ -35,6 +35,9 @@ $ npm install
 ## Compile and run the project
 
 ```bash
+# docker (for redis, postgres, minio)
+$ npm run start:docker:local
+
 # development
 $ npm run start
 
